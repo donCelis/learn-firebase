@@ -5,8 +5,16 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-readData(db, "productos");
+try {
+  readData(db, "productos");
+} catch (error) {
+  console.log(error);
+}
 
-save.addEventListener("click", () => {
-  saveData(db, "productos");
+save.addEventListener("click", async () => {
+  try {
+    await saveData(db, "productos");
+  } catch (error) {
+    console.error("Error adding document: ", error);
+  }
 });
